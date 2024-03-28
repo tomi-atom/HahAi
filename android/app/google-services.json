@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "644213519424",
+    "project_id": "stifar-75137",
+    "storage_bucket": "stifar-75137.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644213519424:android:f8a0340c0c5f01fce89ba5",
+        "android_client_info": {
+          "package_name": "com.atomtekno.hahai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2MCCcf1PymEYCO1ZJUfyCR6EoH4t12_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644213519424:android:f4f9d74b38af5f7de89ba5",
+        "android_client_info": {
+          "package_name": "com.souvikbiswas.notify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2MCCcf1PymEYCO1ZJUfyCR6EoH4t12_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
