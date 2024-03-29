@@ -63,7 +63,7 @@ class _MainLayoutState extends State<MainLayout> {
           ),
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.newspaper),
-            label: 'Berita',
+            label: 'Artikel',
           ),
 
           BottomNavigationBarItem(

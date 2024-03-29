@@ -115,9 +115,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Config.spaceSmall,
                           ElevatedButton(
-                            onPressed: () {
-                              //  _launchURL('https://www.youtube.com/');
+                            onPressed: () async {
+                              const url = 'https://www.youtube.com/channel/UCZ7fRQvICVjF87ZiM29pyUA';
+                              if(await canLaunch(url)){
+                                await launch(url);
+                              }else {
+                                throw 'Could not launch $url';
+                              }
                             },
+
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.zero,
                               backgroundColor:Colors.redAccent,
@@ -146,8 +152,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Config.spaceSmall,
                           ElevatedButton(
-                            onPressed: () {
-                              //  _launchURL('https://www.youtube.com/');
+                            onPressed: () async {
+                              const url = 'https://www.instagram.com/tomifirman88/';
+                              if(await canLaunch(url)){
+                                await launch(url);
+                              }else {
+                                throw 'Could not launch $url';
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.zero,
@@ -177,8 +188,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Config.spaceSmall,
                           ElevatedButton(
-                            onPressed: () {
-                              //  _launchURL('https://www.youtube.com/');
+                            onPressed: () async {
+                              const url = 'https://www.tiktok.com/@tomifirman88';
+                              if(await canLaunch(url)){
+                                await launch(url);
+                              }else {
+                                throw 'Could not launch $url';
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.zero,
@@ -208,8 +224,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Config.spaceSmall,
                           ElevatedButton(
-                            onPressed: () {
-                              //  _launchURL('https://www.youtube.com/');
+                            onPressed: () async {
+                              const url = 'https://saweria.co/tomifirman';
+                              if(await canLaunch(url)){
+                                await launch(url);
+                              }else {
+                                throw 'Could not launch $url';
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.zero,
