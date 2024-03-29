@@ -108,11 +108,10 @@ class _HomePageState extends State<HomePage> {
 
 
                   Expanded(
-
+                    flex: 4,
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-
                         color:Config.primaryColor,
                         image: DecorationImage(
                           image: AssetImage('assets/background.gif'), // Ganti dengan path gambar latar belakang yang sesuai
@@ -261,7 +260,32 @@ class _HomePageState extends State<HomePage> {
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Container(
+                                                    padding: EdgeInsets.symmetric(
+                                                        horizontal: 10, vertical: 5),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black.withOpacity(0.7),
+                                                      borderRadius: BorderRadius.only(
+                                                        bottomLeft: Radius.circular(8),
+                                                        bottomRight: Radius.circular(8),
+                                                      ),
+                                                    ),
+                                                    child: Text(
+                                                      article['judul'],
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10.0,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
 
+                                                ],
+                                              ),
                                             ),
                                           );
                                         },
@@ -361,33 +385,31 @@ class _HomePageState extends State<HomePage> {
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
-                                              child: Center(
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.end,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Container(
-                                                      padding: EdgeInsets.symmetric(
-                                                          horizontal: 10, vertical: 5),
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.black.withOpacity(0.7),
-                                                        borderRadius: BorderRadius.only(
-                                                          bottomLeft: Radius.circular(8),
-                                                          bottomRight: Radius.circular(8),
-                                                        ),
-                                                      ),
-                                                      child: Text(
-                                                        article['judul'],
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 10.0,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Container(
+                                                    padding: EdgeInsets.symmetric(
+                                                        horizontal: 10, vertical: 5),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black.withOpacity(0.7),
+                                                      borderRadius: BorderRadius.only(
+                                                        bottomLeft: Radius.circular(8),
+                                                        bottomRight: Radius.circular(8),
                                                       ),
                                                     ),
+                                                    child: Text(
+                                                      article['judul'],
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10.0,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
 
-                                                  ],
-                                                ),
+                                                ],
                                               ),
                                             ),
                                           );

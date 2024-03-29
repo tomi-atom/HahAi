@@ -6,6 +6,7 @@ import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import "package:shared_preferences/shared_preferences.dart";
+import "package:url_launcher/url_launcher.dart";
 
 import "../models/auth_model.dart";
 import "../providers/dio_provider.dart";
@@ -19,7 +20,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   Map<String, dynamic> user = {};
-
+  Future<void>? _launched;
   Future<Map<String, dynamic>> getUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userDataString = prefs.getString('user_data');
@@ -42,10 +43,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     Config().init(context);
-    List<dynamic> roles = user['roles'] ?? [];
 
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
@@ -56,10 +58,9 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.0),
               color:Config.primaryColor,
               image: DecorationImage(
-                image: AssetImage('assets/background.png'), // Ganti dengan path gambar latar belakang yang sesuai
+                image: AssetImage('assets/background.gif'), // Ganti dengan path gambar latar belakang yang sesuai
                 fit: BoxFit.cover,
               ),
             ),
@@ -81,63 +82,187 @@ class _ProfilePageState extends State<ProfilePage> {
                   'HahAI',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
+                    fontSize: 18,
                   ),
                   textAlign: TextAlign.center,
+                ),
+                Card(
+                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child: Container(
+                    width: 300,
+                    height: 500,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Column(
+                        children: <Widget>[
+                          const Text(
+                            'Developer',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          Divider(
+                            color: Colors.grey[300],
+                          ),
+                          infoChild(_width, Icons.person, 'Tomi Firman Cahyadi'),
+                          const Text(
+                            'Follow Saya di',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          Config.spaceSmall,
+                          ElevatedButton(
+                            onPressed: () {
+                              //  _launchURL('https://www.youtube.com/');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              backgroundColor:Colors.redAccent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Container(
+                                constraints: BoxConstraints(maxWidth: double.infinity),
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(vertical: 16.0),
+                                child: Text(
+                                  'Youtube',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Config.spaceSmall,
+                          ElevatedButton(
+                            onPressed: () {
+                              //  _launchURL('https://www.youtube.com/');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              backgroundColor:Colors.purple,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Container(
+                                constraints: BoxConstraints(maxWidth: double.infinity),
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(vertical: 16.0),
+                                child: Text(
+                                  'Instagram',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Config.spaceSmall,
+                          ElevatedButton(
+                            onPressed: () {
+                              //  _launchURL('https://www.youtube.com/');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              backgroundColor:Colors.blueGrey,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Container(
+                                constraints: BoxConstraints(maxWidth: double.infinity),
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(vertical: 16.0),
+                                child: Text(
+                                  'Tiktok',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Config.spaceSmall,
+                          ElevatedButton(
+                            onPressed: () {
+                              //  _launchURL('https://www.youtube.com/');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              backgroundColor:Colors.orange,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Container(
+                                constraints: BoxConstraints(maxWidth: double.infinity),
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(vertical: 16.0),
+                                child: Text(
+                                  'SAWERIA',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+
+
+                        ],
+                      ),
+                    ),
+                  ),
+
                 ),
               ],
             ),
           ),
         ),
 
-        Expanded(
-          flex: 4,
-          child: Container(
-            color: Colors.grey[200],
-            child: Center(
-              child: Card(
-                margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: Container(
-                  width: 300,
-                  height: 250,
-                  child: Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Column(
-                      children: <Widget>[
-                        const Text(
-                          'Profile',
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        Divider(
-                          color: Colors.grey[300],
-                        ),
-                        infoChild(_width, Icons.person, user['name'] ?? ''),
-                        infoChild(_width, Icons.phone_android, user['email'] ?? ''),
-                        infoChild(
-                          _width,
-                          Icons.reorder,
-                          roles.isNotEmpty
-                              ? ' ${roles.map((role) => role['title']).join(', ')}'
-                              : '', // Ensure this is a String
-                        ),
 
-                      ],
-                    ),
-                  ),
-                ),
-
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }
 
-
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
   Widget infoChild(double width, IconData icon, data) => new Padding(
     padding: new EdgeInsets.only(bottom: 8.0),
     child: new InkWell(
