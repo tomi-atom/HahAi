@@ -9,16 +9,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/dio_provider.dart';
 
-class ArtikelPage extends StatefulWidget {
-  const ArtikelPage({Key? key}) : super(key: key);
+class ToolPage extends StatefulWidget {
+  const ToolPage({Key? key}) : super(key: key);
 
   @override
-  State<ArtikelPage> createState() => _ArtikelPageState();
+  State<ToolPage> createState() => _ToolPageState();
 }
 
 //enum for rambu kondisi
 enum FilterRambu { Baik, Rusak }
-class _ArtikelPageState extends State<ArtikelPage> {
+class _ToolPageState extends State<ToolPage> {
 
   DioProvider dioProvider = DioProvider();
   String url = DioProvider().url;
@@ -69,7 +69,7 @@ class _ArtikelPageState extends State<ArtikelPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Artikel'),
+        title: Text('Trending'),
         automaticallyImplyLeading: false,
 
       ),

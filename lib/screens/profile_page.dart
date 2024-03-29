@@ -78,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 Text(
-                  'Absensi STIFAR Riau',
+                  'HahAI',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

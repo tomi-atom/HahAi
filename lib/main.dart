@@ -29,9 +29,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
   prefs = await SharedPreferences.getInstance();
 
   await dotenv.load(fileName: "assets/config/.env");
@@ -145,30 +145,9 @@ class AuthUtils {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int? userId = prefs.getInt('id');
     final tokenValue = prefs.getString('token') ?? '';
+    navigateToScreen(context, 'main');
 
-    if (tokenValue.isEmpty) {
-      navigateToScreen(context, 'login');
-    } else {
-      try {
-        final response = await DioProvider().getUser(tokenValue);
-
-        if (response != null) {
-          final user = json.decode(response);
-          print(user);
-          if (userId != null && userId == user['id']) {
-            navigateToScreen(context, 'main');
-          } else {
-            navigateToScreen(context, 'login');
-          }
-        } else {
-          navigateToScreen(context, 'login');
-        }
-      } catch (error) {
-        print('Error: $error');
-        navigateToScreen(context, 'login');
-      }
     }
-  }
 
   static void navigateToScreen(BuildContext context, String routeName) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {

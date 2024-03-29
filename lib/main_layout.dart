@@ -8,6 +8,7 @@ import 'package:hahai/screens/profile_page.dart';
 import 'package:hahai/screens/rambu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hahai/screens/tool_page.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({Key? key}) : super(key: key);
@@ -33,9 +34,8 @@ class _MainLayoutState extends State<MainLayout> {
         }),
         children: <Widget>[
           const HomePage(),
+          ToolPage(),
           ArtikelPage(),
-          NotifikasiPage(),
-          InfoPage(),
           ProfilePage(),
         ],
       ),
@@ -58,20 +58,17 @@ class _MainLayoutState extends State<MainLayout> {
           ),
 
           BottomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.arrowTrendUp),
+            label: 'Trending',
+          ),
+          BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.newspaper),
             label: 'Berita',
           ),
+
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.bell),
-            label: 'Notifikasi',
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.circleInfo),
-            label: 'Info',
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.user),
-            label: 'Profile',
+            icon: FaIcon(FontAwesomeIcons.addressBook),
+            label: 'About',
           ),
         ],
       ),
