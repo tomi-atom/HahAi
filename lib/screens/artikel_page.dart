@@ -89,7 +89,6 @@ class _ArtikelPageState extends State<ArtikelPage> {
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
                       color:Config.primaryColor,
                       image: DecorationImage(
                         image: AssetImage('assets/background.gif'), // Ganti dengan path gambar latar belakang yang sesuai

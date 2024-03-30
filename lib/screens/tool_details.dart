@@ -24,7 +24,6 @@ class DetailToolPage extends StatelessWidget {
   Widget build(BuildContext context) {
     late final HtmlUnescape htmlUnescape;
     String url = DioProvider().url;
-    AdManager().initialize();
     return Scaffold(
       appBar: AppBar(
         title: Text('Detail Tool AI'),
@@ -105,53 +104,11 @@ class DetailToolPage extends StatelessWidget {
 
             SizedBox(height: 20), // Add some space between the content and the ad
 
-            // AdMob Banner Ad
-            Container(
-              alignment: Alignment.center,
-              child: AdWidget(ad: AdManager().bannerAd),
-              width: AdSize.banner.width.toDouble(),
-              height: AdSize.banner.height.toDouble(),
-            ),
+
 
           ],
         ),
       ),
     );
-  }
-}
-class AdManager {
-  static final AdManager _instance = AdManager._internal();
-
-  factory AdManager() => _instance;
-
-  AdManager._internal();
-
-  late BannerAd _bannerAd;
-
-  BannerAd get bannerAd => _bannerAd;
-
-  void initialize() {
-    _bannerAd = BannerAd(
-      adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-7319269804560504/8512599311'
-          : 'ca-app-pub-3940256099942544/4411468910',
-      size: AdSize.banner,
-      request: AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          // Ad has been loaded
-        },
-        onAdFailedToLoad: (ad, error) {
-          // Ad failed to load
-          ad.dispose();
-        },
-      ),
-    );
-
-    _loadBannerAd();
-  }
-
-  void _loadBannerAd() {
-    _bannerAd.load();
   }
 }
