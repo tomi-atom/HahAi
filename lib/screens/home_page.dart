@@ -257,7 +257,7 @@ class _HomePageState extends State<HomePage> {
                                         },
                                       ),
                                     ]
-                                        : tool.map((article) {
+                                        : tool.map((toolitem) {
                                       return Builder(
                                         builder: (BuildContext context) {
                                           return GestureDetector(
@@ -266,7 +266,7 @@ class _HomePageState extends State<HomePage> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      DetailArtikel(artikelData: article),
+                                                      DetailToolPage(toolData:toolitem),
                                                 ),
                                               );
                                             },
@@ -277,7 +277,7 @@ class _HomePageState extends State<HomePage> {
                                                 borderRadius: BorderRadius.circular(8.0),
                                                 image: DecorationImage(
                                                   image: NetworkImage(
-                                                      '${DioProvider().url}/${article['gambar']}'),
+                                                      '${DioProvider().url}/${toolitem['gambar']}'),
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -296,7 +296,7 @@ class _HomePageState extends State<HomePage> {
                                                       ),
                                                     ),
                                                     child: Text(
-                                                      article['judul'],
+                                                      toolitem['judul'],
                                                       style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 10.0,
@@ -449,9 +449,9 @@ class _HomePageState extends State<HomePage> {
                                 physics:AlwaysScrollableScrollPhysics(),
                                 itemCount: tool.length,
                                 itemBuilder: (context, index) {
-                                  var article = tool[index];
+                                  var toolitem = tool[index];
                                   var tanggal =
-                                  DateTime.parse(article['published_at']);
+                                  DateTime.parse(toolitem['published_at']);
                                   var formattedDate =
                                   DateFormat.yMMMMd().format(tanggal);
 
@@ -473,14 +473,14 @@ class _HomePageState extends State<HomePage> {
                                       leading: ClipRRect(
                                         borderRadius: BorderRadius.circular(8.0),
                                         child: Image.network(
-                                          '$url/${article['gambar']}',
+                                          '$url/${toolitem['gambar']}',
                                           width: 50,
                                           height: 50,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
                                       title: Text(
-                                        article['judul'],
+                                        toolitem['judul'],
                                         style: TextStyle(color: Colors.white), // Mengatur warna teks menjadi putih
                                       ),
                                       subtitle: Text(
@@ -494,7 +494,7 @@ class _HomePageState extends State<HomePage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => DetailToolPage(
-                                              toolData: article,
+                                              toolData: toolitem,
                                             ),
                                           ),
                                         );
