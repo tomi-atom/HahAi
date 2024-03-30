@@ -7,7 +7,7 @@ class AdManager {
   static String getAdUnitId() {
     if (Platform.isAndroid) {
       // Gunakan ini jika perangkat adalah Android
-      return 'ca-app-pub-3940256099942544/6300978111';
+      return 'ca-app-pub-5082169806538743/8242010920';
     } else if (Platform.isIOS) {
       // Gunakan ini jika perangkat adalah iOS
       return 'ca-app-pub-3940256099942544/2934735716';
