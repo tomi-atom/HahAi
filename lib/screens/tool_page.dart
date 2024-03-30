@@ -200,6 +200,7 @@ class _ToolPageState extends State<ToolPage> {
                               ),
                             ),
                           ),
+                          SizedBox(height: 20.0),
                           SizedBox(
                             width: widget.adSize.width.toDouble(),
                             height: widget.adSize.height.toDouble(),

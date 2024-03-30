@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:art_sweetalert/art_sweetalert.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hahai/screens/artikel_details.dart';
 import 'package:hahai/utils/config.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,15 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/dio_provider.dart';
+import '../utils/ad_manager.dart';
 
 class ArtikelPage extends StatefulWidget {
-  const ArtikelPage({Key? key}) : super(key: key);
+  late final AdSize adSize;
+
+  ArtikelPage({
+    super.key,
+    this.adSize = AdSize.banner,
+  });
 
   @override
   State<ArtikelPage> createState() => _ArtikelPageState();
@@ -23,7 +30,7 @@ class _ArtikelPageState extends State<ArtikelPage> {
   DioProvider dioProvider = DioProvider();
   String url = DioProvider().url;
   Map<String, dynamic> user = {};
-
+  BannerAd? _bannerAd;
   List<dynamic> artikel = [];
 
 
@@ -49,7 +56,34 @@ class _ArtikelPageState extends State<ArtikelPage> {
   void initState() {
     getArtikel();
     super.initState();
+    _loadAd();
   }
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    super.dispose();
+  }
+
+  void _loadAd() {
+    _bannerAd = AdManager.createBannerAd(widget.adSize, BannerAdListener(
+      onAdLoaded: (ad) {
+        if (!mounted) {
+          ad.dispose();
+          return;
+        }
+        setState(() {
+          _bannerAd = ad as BannerAd;
+        });
+      },
+      onAdFailedToLoad: (ad, error) {
+        debugPrint('BannerAd failed to load: $error');
+        ad.dispose();
+      },
+    ));
+
+    _bannerAd?.load();
+  }
+
   Future<void> _onRefresh() async {
     await getArtikel();
     ArtSweetAlert.show(
@@ -172,6 +206,14 @@ class _ArtikelPageState extends State<ArtikelPage> {
                             ),
                             ),
 
+                          ),
+                          SizedBox(height: 20.0),
+                          SizedBox(
+                            width: widget.adSize.width.toDouble(),
+                            height: widget.adSize.height.toDouble(),
+                            child: _bannerAd == null
+                                ? SizedBox()
+                                : AdWidget(ad: _bannerAd!),
                           ),
 
                         ],
