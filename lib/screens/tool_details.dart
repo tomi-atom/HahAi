@@ -4,10 +4,10 @@ import 'package:intl/intl.dart';
 
 import '../providers/dio_provider.dart';
 
-class DetailArtikelPage extends StatelessWidget {
-  final Map<String, dynamic> artikelData;
+class DetailToolPage extends StatelessWidget {
+  final Map<String, dynamic> toolData;
 
-  const DetailArtikelPage({Key? key, required this.artikelData}) : super(key: key);
+  const DetailToolPage({Key? key, required this.toolData}) : super(key: key);
 
   String _removeHtmlTags(String htmlString) {
     final HtmlUnescape htmlUnescape = HtmlUnescape();
@@ -20,7 +20,7 @@ class DetailArtikelPage extends StatelessWidget {
     String url = DioProvider().url;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detail Artikel'),
+        title: Text('Detail Tool AI'),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -28,11 +28,11 @@ class DetailArtikelPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Hero(
-              tag: artikelData['id'], // Unique tag for the Hero animation
+              tag: toolData['id'], // Unique tag for the Hero animation
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0), // Adjust the value as needed
                 child: Image.network(
-                  '$url/${artikelData['gambar']}', // Path to your article image
+                  '$url/${toolData['gambar']}', // Path to your article image
                   width: double.infinity,
                   height: 200,
                   fit: BoxFit.cover,
@@ -42,17 +42,17 @@ class DetailArtikelPage extends StatelessWidget {
 
             SizedBox(height: 20),
             Text(
-              artikelData['judul'], // Article title
+              toolData['judul'], // Article title
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
             Text(
-              DateFormat('dd-MM-yyyy').format(DateTime.parse(artikelData['published_at'])), // Published date
+              DateFormat('dd-MM-yyyy').format(DateTime.parse(toolData['published_at'])), // Published date
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             SizedBox(height: 20),
             Text(
-              _removeHtmlTags(artikelData['body']),// Text content without HTML tags
+              _removeHtmlTags(toolData['body']),// Text content without HTML tags
               style: TextStyle(fontSize: 18),
             ),
           ],

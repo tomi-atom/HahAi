@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:hahai/screens/detail_artikel.dart';
+import 'package:hahai/screens/tool_details.dart';
 import 'package:hahai/utils/config.dart';
 import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -23,11 +24,30 @@ class _HomePageState extends State<HomePage> {
   Map<String, dynamic> background = {};
   List<dynamic> favList = [];
   List<dynamic> artikel = [];
+  List<dynamic> artikelai = [];
   List<dynamic> tool = [];
   late TextEditingController _search;
 
 
 
+  Future<void> getTool() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final data = await dioProvider.getTool();
+
+    if (data != 'Error') {
+      print('Cek Artikel $data');
+
+      setState(() {
+        // Decode JSON data
+        tool = json.decode(data);
+
+        // Display only the first 3 articles
+        tool = tool.length > 10 ? tool.sublist(0, 10) : tool;
+
+        print('Cek Artikel $tool');
+      });
+    }
+  }
   Future<void> getArtikel() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final data = await dioProvider.getArtikel();
@@ -65,6 +85,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     dioProvider.initializeDio();
     getArtikel();
+    getTool();
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       // Fungsi ini akan dipanggil setelah widget selesai dibangun
       Navigator.of(context).restorablePushAndRemoveUntil(
@@ -211,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                                       autoPlayAnimationDuration: Duration(milliseconds: 800),
                                       viewportFraction: 0.5,
                                     ),
-                                    items: artikel.isEmpty
+                                    items: tool.isEmpty
                                         ? [
                                       Builder(
                                         builder: (BuildContext context) {
@@ -224,7 +245,7 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                'Berita',
+                                                'Trending',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 16.0,
@@ -236,7 +257,7 @@ class _HomePageState extends State<HomePage> {
                                         },
                                       ),
                                     ]
-                                        : artikel.map((article) {
+                                        : tool.map((article) {
                                       return Builder(
                                         builder: (BuildContext context) {
                                           return GestureDetector(
@@ -422,13 +443,13 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Config.spaceSmall,
                             Expanded(
-                              child: artikel.isNotEmpty
+                              child: tool.isNotEmpty
                                   ? ListView.builder(
                                 shrinkWrap: true,
                                 physics:AlwaysScrollableScrollPhysics(),
-                                itemCount: artikel.length,
+                                itemCount: tool.length,
                                 itemBuilder: (context, index) {
-                                  var article = artikel[index];
+                                  var article = tool[index];
                                   var tanggal =
                                   DateTime.parse(article['published_at']);
                                   var formattedDate =
@@ -472,8 +493,8 @@ class _HomePageState extends State<HomePage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => DetailArtikelPage(
-                                              artikelData: article,
+                                            builder: (context) => DetailToolPage(
+                                              toolData: article,
                                             ),
                                           ),
                                         );

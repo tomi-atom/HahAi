@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:art_sweetalert/art_sweetalert.dart';
-import 'package:hahai/screens/artikel_details.dart';
+import 'package:hahai/screens/tool_details.dart';
+import 'package:hahai/screens/tool_details.dart';
 import 'package:hahai/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -24,34 +25,34 @@ class _ToolPageState extends State<ToolPage> {
   String url = DioProvider().url;
   Map<String, dynamic> user = {};
 
-  List<dynamic> artikel = [];
+  List<dynamic> tool = [];
 
 
-  Future<void> getArtikel() async {
+  Future<void> getTool() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final data = await dioProvider.getArtikel();
+    final data = await dioProvider.getTool();
 
     if (data != 'Error') {
       print('Cek Artikel $data');
 
       setState(() {
         // Decode JSON data
-        artikel = json.decode(data);
+        tool = json.decode(data);
 
         // Display only the first 3 articles
-        artikel = artikel.length > 10 ? artikel.sublist(0, 10) : artikel;
+        tool = tool.length > 10 ? tool.sublist(0, 10) : tool;
 
-        print('Cek Artikel $artikel');
+        print('Cek Artikel $tool');
       });
     }
   }
   @override
   void initState() {
-    getArtikel();
+    getTool();
     super.initState();
   }
   Future<void> _onRefresh() async {
-    await getArtikel();
+    await getTool();
     ArtSweetAlert.show(
       context: context,
       artDialogArgs: ArtDialogArgs(
@@ -69,7 +70,7 @@ class _ToolPageState extends State<ToolPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trending'),
+        title: Text('Detail Tool'),
         automaticallyImplyLeading: false,
 
       ),
@@ -107,13 +108,13 @@ class _ToolPageState extends State<ToolPage> {
                         children: <Widget>[
 
                           Expanded(
-                            child: artikel.isNotEmpty
+                            child: tool.isNotEmpty
                                 ? ListView.builder(
                               shrinkWrap: true,
                               physics:AlwaysScrollableScrollPhysics(),
-                              itemCount: artikel.length,
+                              itemCount: tool.length,
                               itemBuilder: (context, index) {
-                                var article = artikel[index];
+                                var article = tool[index];
                                 var tanggal =
                                 DateTime.parse(article['published_at']);
                                 var formattedDate =
@@ -157,8 +158,8 @@ class _ToolPageState extends State<ToolPage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => DetailArtikelPage(
-                                            artikelData: article,
+                                          builder: (context) => DetailToolPage(
+                                            toolData: article,
                                           ),
                                         ),
                                       );

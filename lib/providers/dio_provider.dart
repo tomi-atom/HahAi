@@ -317,6 +317,19 @@ class DioProvider {
       return error;
     }
   }
+  Future<dynamic> getTool() async {
+    try {
+      var response = await Dio().get('$baseUrl/api/tool');
+
+      if (response.statusCode == 200 && response.data != '') {
+        return json.encode(response.data);
+      } else {
+        return 'Error';
+      }
+    } catch (error) {
+      return error;
+    }
+  }
 
   Future<dynamic> getJamKerja() async {
     try {

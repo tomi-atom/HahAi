@@ -90,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: Container(
                     width: 300,
-                    height: 500,
+                    height: 350,
                     child: Padding(
                       padding: const EdgeInsets.all(5),
                       child: Column(
@@ -113,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               fontWeight: FontWeight.w800,
                             ),
                           ),
-                          Config.spaceSmall,
+                          SizedBox(height: 5.0),
                           ElevatedButton(
                             onPressed: () async {
                               const url = 'https://www.youtube.com/channel/UCZ7fRQvICVjF87ZiM29pyUA';
@@ -150,7 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                           ),
-                          Config.spaceSmall,
+                          SizedBox(height: 5.0),
                           ElevatedButton(
                             onPressed: () async {
                               const url = 'https://www.instagram.com/tomifirman88/';
@@ -186,7 +186,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                           ),
-                          Config.spaceSmall,
+                          SizedBox(height: 5.0),
                           ElevatedButton(
                             onPressed: () async {
                               const url = 'https://www.tiktok.com/@tomifirman88';
@@ -222,7 +222,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                           ),
-                          Config.spaceSmall,
+                          SizedBox(height: 5.0),
                           ElevatedButton(
                             onPressed: () async {
                               const url = 'https://saweria.co/tomifirman';
