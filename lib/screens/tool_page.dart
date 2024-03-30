@@ -1,18 +1,33 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:art_sweetalert/art_sweetalert.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hahai/screens/tool_details.dart';
 import 'package:hahai/screens/tool_details.dart';
 import 'package:hahai/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter/widgets.dart';
 import '../providers/dio_provider.dart';
 
 class ToolPage extends StatefulWidget {
-  const ToolPage({Key? key}) : super(key: key);
+  late final AdSize adSize;
 
+  /// The AdMob ad unit to show.
+  ///
+  /// TODO: replace this test ad unit with your own ad unit
+  final String adUnitId = Platform.isAndroid
+  // Use this ad unit on Android...
+      ? 'ca-app-pub-3940256099942544/6300978111'
+  // ... or this one on iOS.
+      : 'ca-app-pub-3940256099942544/2934735716';
+
+  ToolPage({
+    super.key,
+    this.adSize = AdSize.banner,
+  });
   @override
   State<ToolPage> createState() => _ToolPageState();
 }
@@ -24,7 +39,7 @@ class _ToolPageState extends State<ToolPage> {
   DioProvider dioProvider = DioProvider();
   String url = DioProvider().url;
   Map<String, dynamic> user = {};
-
+  BannerAd? _bannerAd;
   List<dynamic> tool = [];
 
 
@@ -50,6 +65,39 @@ class _ToolPageState extends State<ToolPage> {
   void initState() {
     getTool();
     super.initState();
+    _loadAd();
+  }
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    super.dispose();
+  }
+  void _loadAd() {
+    final bannerAd = BannerAd(
+      size: widget.adSize,
+      adUnitId: widget.adUnitId,
+      request: const AdRequest(),
+      listener: BannerAdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          if (!mounted) {
+            ad.dispose();
+            return;
+          }
+          setState(() {
+            _bannerAd = ad as BannerAd;
+          });
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (ad, error) {
+          debugPrint('BannerAd failed to load: $error');
+          ad.dispose();
+        },
+      ),
+    );
+
+    // Start loading.
+    bannerAd.load();
   }
   Future<void> _onRefresh() async {
     await getTool();
@@ -175,7 +223,15 @@ class _ToolPageState extends State<ToolPage> {
                             ),
 
                           ),
-
+                          SizedBox(
+                            width: widget.adSize.width.toDouble(),
+                            height: widget.adSize.height.toDouble(),
+                            child: _bannerAd == null
+                            // Nothing to render yet.
+                                ? SizedBox()
+                            // The actual ad.
+                                : AdWidget(ad: _bannerAd!),
+                          ),
                         ],
                       ),
                     ),

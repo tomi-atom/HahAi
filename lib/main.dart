@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hahai/main_layout.dart';
 import 'package:hahai/models/auth_model.dart';
 import 'package:hahai/providers/dio_provider.dart';
@@ -42,7 +43,7 @@ void main() async {
   // Initialize DioProvider or any other setup you need
   DioProvider dioProvider = DioProvider();
   await dioProvider.initializeDio();
-
+  MobileAds.instance.initialize();
   runApp(
     ChangeNotifierProvider<AuthModel>(
       create: (context) => AuthModel(),

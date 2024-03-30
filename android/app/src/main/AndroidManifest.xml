@@ -43,7 +43,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-
+       <meta-data
+           android:name="com.google.android.gms.ads.APPLICATION_ID"
+           android:value="ca-app-pub-5082169806538743~2639481832"/>
        <receiver
            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
            android:enabled="true"
