@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:hahai/screens/detail_artikel.dart';
 import 'package:hahai/screens/tool_details.dart';
 import 'package:hahai/utils/config.dart';
 import 'package:art_sweetalert/art_sweetalert.dart';
@@ -391,7 +390,7 @@ class _HomePageState extends State<HomePage> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      DetailArtikel(artikelData: article),
+                                                      DetailArtikelPage(artikelData: article),
                                                 ),
                                               );
                                             },

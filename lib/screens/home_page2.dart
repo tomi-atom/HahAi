@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:hahai/models/auth_model.dart';
-import 'package:hahai/screens/detail_artikel.dart';
+import 'package:hahai/screens/artikel_details.dart';
 import 'package:hahai/screens/page_absensi.dart';
 import 'package:hahai/screens/page_cuti.dart';
 import 'package:hahai/screens/page_cuti_approve.dart';
@@ -302,7 +302,7 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      DetailArtikel(artikelData: article),
+                                      DetailArtikelPage(artikelData: article),
                                 ),
                               );
                             },

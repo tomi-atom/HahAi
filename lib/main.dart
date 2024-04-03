@@ -115,7 +115,7 @@ class MyApp extends StatelessWidget {
             type: BottomNavigationBarType.fixed,
           ),
           textTheme: TextTheme(
-            bodyText2: TextStyle(
+            bodyMedium: TextStyle(
               fontFamily: 'NeoSans', // Set your desired font family
             ),
             // Add more text styles as needed
