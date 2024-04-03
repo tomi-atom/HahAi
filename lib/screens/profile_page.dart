@@ -106,6 +106,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: Colors.grey[300],
                           ),
                           infoChild(_width, Icons.person, 'Tomi Firman Cahyadi'),
+                          infoChild(_width, Icons.email, 'atomfire88@gmail.com'),
                           const Text(
                             'Follow Saya di',
                             style: TextStyle(
