@@ -91,6 +91,10 @@ class _DetailToolPageState extends State<DetailToolPage> {
               widget.toolData['judul'],
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+            Text(
+              widget.toolData['written_by'],
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 10),
             Text(
               DateFormat('dd-MM-yyyy').format(DateTime.parse( widget.toolData['published_at'])), // Published date
